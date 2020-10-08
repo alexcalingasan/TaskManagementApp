@@ -18,6 +18,7 @@ namespace TaskManagementApp.Application.Common.Behaviors
         public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             var context = new ValidationContext(request);
+            //for FluentApi 9.x it should be like this var context = new ValidationContext<TRequest>(request);
             var failures = _validators
                 .Select(v => v.Validate(context))
                 .SelectMany(result => result.Errors)
